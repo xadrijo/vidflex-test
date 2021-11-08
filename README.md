@@ -20,7 +20,7 @@ docker-compose up --build
 4. After the app is running:
 - Create some products
 ```
-curl --location --request POST 'http://localhost:8000/product' \
+curl --location --request POST 'http://localhost:8000/api/product' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "label": "product-1",
@@ -30,7 +30,7 @@ curl --location --request POST 'http://localhost:8000/product' \
 }'
 ```
 ```
-curl --location --request POST 'http://localhost:8000/product' \
+curl --location --request POST 'http://localhost:8000/api/product' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "label": "product-2",
@@ -43,13 +43,13 @@ curl --location --request POST 'http://localhost:8000/product' \
 - You can check if the product is on db with this endpoint
 
 ```
-curl --location --request GET 'http://localhost:8000/product/1' \
+curl --location --request GET 'http://localhost:8000/api/product/1' \
 --header 'Content-Type: application/json' \
 ```
 
 - Create a shopping cart
 ```
-curl --location --request POST 'http://localhost:8000/cart' \
+curl --location --request POST 'http://localhost:8000/api/cart' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 
@@ -58,26 +58,26 @@ curl --location --request POST 'http://localhost:8000/cart' \
 
 - Add some product to the shopping cart
  ``` 
-  curl --location --request POST 'http://localhost:8000/cart/products/1' \
+  curl --location --request POST 'http://localhost:8000/api/cart/products/1' \
   --header 'Content-Type: application/json' \
   --data-raw '{
-  "cart_id": 1,
-  "quantity": 5
+    "cart_id": 1,
+    "quantity": 5
   }'
 ```
 
  ``` 
-  curl --location --request POST 'http://localhost:8000/cart/products/2' \
+  curl --location --request POST 'http://localhost:8000/api/cart/products/2' \
   --header 'Content-Type: application/json' \
   --data-raw '{
-  "cart_id": 1,
-  "quantity": 3
+    "cart_id": 1,
+    "quantity": 3
   }'
 ```
 
 - Get list of product in the shopping cart
 ```
-curl --location --request GET 'http://localhost:8000/cart/1' \
+curl --location --request GET 'http://localhost:8000/api/cart/1' \
 --data-raw ''
 ```
 

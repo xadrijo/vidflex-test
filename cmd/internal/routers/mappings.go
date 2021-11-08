@@ -18,11 +18,12 @@ func NewMapper(productHandler handlers.ProductHandler, cartHandler handlers.Cart
 }
 
 func (m Mapper) configureMappings(router *gin.Engine) {
-	router.GET("/", handlers.GetHome)
-	router.GET("/product/:id", m.productHandler.GetProduct)
-	router.POST("/product", m.productHandler.CreateProduct)
+	apiGroup := router.Group("/api")
+	apiGroup.GET("/", handlers.GetHome)
+	apiGroup.GET("/product/:id", m.productHandler.GetProduct)
+	apiGroup.POST("/product", m.productHandler.CreateProduct)
 
-	router.GET("/cart/:id", m.cartHandler.GetCart)
-	router.POST("/cart", m.cartHandler.CreateCart)
-	router.POST("/cart/products/:id", m.cartHandler.AddProductCart)
+	apiGroup.GET("/cart/:id", m.cartHandler.GetCart)
+	apiGroup.POST("/cart", m.cartHandler.CreateCart)
+	apiGroup.POST("/cart/products/:id", m.cartHandler.AddProductCart)
 }
