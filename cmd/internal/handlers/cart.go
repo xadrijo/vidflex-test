@@ -2,13 +2,13 @@ package handlers
 
 import (
 	"context"
-	"github.com/xadrijo/vidflex-test/cmd/internal/product"
 	"log"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/xadrijo/vidflex-test/cmd/internal/cart"
+	"github.com/xadrijo/vidflex-test/cmd/internal/product"
 )
 
 type cartService interface {

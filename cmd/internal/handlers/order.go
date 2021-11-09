@@ -2,13 +2,12 @@ package handlers
 
 import (
 	"context"
-	"github.com/xadrijo/vidflex-test/cmd/internal/product"
-	"log"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/xadrijo/vidflex-test/cmd/internal/order"
+	"github.com/xadrijo/vidflex-test/cmd/internal/product"
 )
 
 type orderService interface {
@@ -43,7 +42,6 @@ func (os OrderHandler) CreateOrder(c *gin.Context) {
 		c.IndentedJSON(http.StatusBadRequest, err)
 		return
 	}
-	log.Printf("order - handler: %d", ord.CartID)
 
 	result, err := os.orderService.InsertOrder(c, ord)
 	if err != nil {

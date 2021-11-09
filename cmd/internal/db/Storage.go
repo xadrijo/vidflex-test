@@ -3,13 +3,13 @@ package db
 import (
 	"errors"
 	"fmt"
-	"github.com/xadrijo/vidflex-test/cmd/internal/cart"
-	"github.com/xadrijo/vidflex-test/cmd/internal/order"
 	"log"
 	"os"
 	"time"
 
 	"github.com/jmoiron/sqlx"
+	"github.com/xadrijo/vidflex-test/cmd/internal/cart"
+	"github.com/xadrijo/vidflex-test/cmd/internal/order"
 	"github.com/xadrijo/vidflex-test/cmd/internal/product"
 )
 

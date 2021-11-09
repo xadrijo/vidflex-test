@@ -2,8 +2,9 @@ package order
 
 import (
 	"context"
-	"github.com/xadrijo/vidflex-test/cmd/internal/product"
 	"log"
+
+	"github.com/xadrijo/vidflex-test/cmd/internal/product"
 )
 
 // Storage defines the interface we expect from our db implementation
@@ -43,4 +44,3 @@ func (s Service) InsertOrder(ctx context.Context, o Order) (Order, error) {
 
 	return ord, nil
 }
-

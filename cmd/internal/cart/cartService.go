@@ -2,8 +2,9 @@ package cart
 
 import (
 	"context"
-	"github.com/xadrijo/vidflex-test/cmd/internal/product"
 	"log"
+
+	"github.com/xadrijo/vidflex-test/cmd/internal/product"
 )
 
 // Storage defines the interface we expect from our db implementation
@@ -55,4 +56,3 @@ func (s Service) AddProductInCart(ctx context.Context, cp CartProduct) (CartProd
 
 	return c, nil
 }
-

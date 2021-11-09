@@ -105,5 +105,49 @@ You should see something like this:
 ]
 ```
 
+- Create an order with a cart_id
+ ``` 
+    curl --location --request POST 'http://localhost:8000/api/order' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+    "cart_id": 1
+    }'
+ ``` 
+Result:
+```json
+{
+    "id": 67,
+    "cart_id": 1,
+    "created_at": "0001-01-01T00:00:00Z",
+    "updated_at": "0001-01-01T00:00:00Z"
+}
+```
 
+- Get list of product from an order
+```
+curl --location --request GET 'http://localhost:8000/api/order/67'
+ ``` 
 
+You should see something similar to a list of products:
+```json
+[
+    {
+        "ID": 1,
+        "Label": "product-1",
+        "Type": "type-1",
+        "Url": "",
+        "Weight": 54.5,
+        "CreatedAt": "2021-11-09T02:27:59.880887Z",
+        "UpdatedAt": "2021-11-09T02:27:59.880887Z"
+    },
+    {
+        "ID": 2,
+        "Label": "product-2",
+        "Type": "type-2",
+        "Url": "http://someweb.com",
+        "Weight": 0,
+        "CreatedAt": "2021-11-09T02:28:23.451749Z",
+        "UpdatedAt": "2021-11-09T02:28:23.451749Z"
+    }
+]
+```
