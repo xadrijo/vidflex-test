@@ -8,4 +8,5 @@ require (
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/jmoiron/sqlx v1.3.4
 	github.com/lib/pq v1.10.3
+	github.com/stretchr/testify v1.7.0 // indirect
 )

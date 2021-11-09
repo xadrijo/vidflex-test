@@ -1,3 +1,5 @@
+//go:generate mockgen -source=orderservice.go -destination=orderservice_mocks_test.go -package=order github.com/xadrijo/vidflex-test/internal/order Storage
+
 package order
 
 import (
