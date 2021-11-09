@@ -6,8 +6,8 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/xadrijo/vidflex-test/cmd/internal/order"
-	"github.com/xadrijo/vidflex-test/cmd/internal/product"
+	"github.com/xadrijo/vidflex-test/internal/order"
+	"github.com/xadrijo/vidflex-test/internal/product"
 )
 
 type orderService interface {

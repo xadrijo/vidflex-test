@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/xadrijo/vidflex-test/cmd/internal/product"
+	"github.com/xadrijo/vidflex-test/internal/product"
 )
 
 // Storage defines the interface we expect from our db implementation

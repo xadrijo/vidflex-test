@@ -2,13 +2,13 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/xadrijo/vidflex-test/cmd/internal/handlers"
+	"github.com/xadrijo/vidflex-test/internal/handlers"
 )
 
 type Mapper struct {
 	productHandler handlers.ProductHandler
-	cartHandler handlers.CartHandler
-	orderHandler handlers.OrderHandler
+	cartHandler    handlers.CartHandler
+	orderHandler   handlers.OrderHandler
 }
 
 func NewMapper(
@@ -17,8 +17,8 @@ func NewMapper(
 	orderHandler handlers.OrderHandler) Mapper {
 	return Mapper{
 		productHandler: productHandler,
-		cartHandler: cartHandler,
-		orderHandler: orderHandler,
+		cartHandler:    cartHandler,
+		orderHandler:   orderHandler,
 	}
 }
 

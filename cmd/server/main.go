@@ -1,15 +1,15 @@
 package main
 
 import (
-	"github.com/xadrijo/vidflex-test/cmd/internal/cart"
-	"github.com/xadrijo/vidflex-test/cmd/internal/order"
+	"github.com/xadrijo/vidflex-test/internal/cart"
+	"github.com/xadrijo/vidflex-test/internal/db"
+	handlers2 "github.com/xadrijo/vidflex-test/internal/handlers"
+	"github.com/xadrijo/vidflex-test/internal/order"
+	"github.com/xadrijo/vidflex-test/internal/product"
+	routers2 "github.com/xadrijo/vidflex-test/internal/routers"
 	"log"
 
 	"github.com/gin-gonic/gin"
-	"github.com/xadrijo/vidflex-test/cmd/internal/db"
-	"github.com/xadrijo/vidflex-test/cmd/internal/handlers"
-	"github.com/xadrijo/vidflex-test/cmd/internal/product"
-	"github.com/xadrijo/vidflex-test/cmd/internal/routers"
 )
 
 var (
@@ -47,17 +47,17 @@ func manageDependencies() error {
 	}
 
 	productService := product.New(storageProvider)
-	productHandler := handlers.New(productService)
+	productHandler := handlers2.New(productService)
 	cartService := cart.New(storageProvider)
-	cartHandler := handlers.NewCart(cartService)
+	cartHandler := handlers2.NewCart(cartService)
 	orderService := order.New(storageProvider)
-	orderHandler := handlers.NewOrder(orderService)
-	mapper := routers.NewMapper(
+	orderHandler := handlers2.NewOrder(orderService)
+	mapper := routers2.NewMapper(
 		productHandler,
 		cartHandler,
 		orderHandler,
 		)
-	router = routers.CreateRouter(mapper)
+	router = routers2.CreateRouter(mapper)
 
 	return nil
 }

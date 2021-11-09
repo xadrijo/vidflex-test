@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/xadrijo/vidflex-test/cmd/internal/cart"
-	"github.com/xadrijo/vidflex-test/cmd/internal/order"
-	"github.com/xadrijo/vidflex-test/cmd/internal/product"
+	"github.com/xadrijo/vidflex-test/internal/cart"
+	"github.com/xadrijo/vidflex-test/internal/order"
+	"github.com/xadrijo/vidflex-test/internal/product"
 )
 
 type Storage struct {
