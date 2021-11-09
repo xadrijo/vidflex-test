@@ -8,12 +8,17 @@ import (
 type Mapper struct {
 	productHandler handlers.ProductHandler
 	cartHandler handlers.CartHandler
+	orderHandler handlers.OrderHandler
 }
 
-func NewMapper(productHandler handlers.ProductHandler, cartHandler handlers.CartHandler) Mapper {
+func NewMapper(
+	productHandler handlers.ProductHandler,
+	cartHandler handlers.CartHandler,
+	orderHandler handlers.OrderHandler) Mapper {
 	return Mapper{
 		productHandler: productHandler,
 		cartHandler: cartHandler,
+		orderHandler: orderHandler,
 	}
 }
 
@@ -26,4 +31,7 @@ func (m Mapper) configureMappings(router *gin.Engine) {
 	apiGroup.GET("/cart/:id", m.cartHandler.GetCart)
 	apiGroup.POST("/cart", m.cartHandler.CreateCart)
 	apiGroup.POST("/cart/products/:id", m.cartHandler.AddProductCart)
+
+	apiGroup.POST("/order", m.orderHandler.CreateOrder)
+	apiGroup.GET("/order/:id", m.orderHandler.GetOrder)
 }

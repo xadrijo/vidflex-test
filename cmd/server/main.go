@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/xadrijo/vidflex-test/cmd/internal/cart"
+	"github.com/xadrijo/vidflex-test/cmd/internal/order"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -49,7 +50,13 @@ func manageDependencies() error {
 	productHandler := handlers.New(productService)
 	cartService := cart.New(storageProvider)
 	cartHandler := handlers.NewCart(cartService)
-	mapper := routers.NewMapper(productHandler, cartHandler)
+	orderService := order.New(storageProvider)
+	orderHandler := handlers.NewOrder(orderService)
+	mapper := routers.NewMapper(
+		productHandler,
+		cartHandler,
+		orderHandler,
+		)
 	router = routers.CreateRouter(mapper)
 
 	return nil

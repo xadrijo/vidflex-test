@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/xadrijo/vidflex-test/cmd/internal/cart"
+	"github.com/xadrijo/vidflex-test/cmd/internal/order"
 	"log"
 	"os"
 	"time"
@@ -48,7 +49,8 @@ func New() (Storage, error) {
 func (s Storage) GetProductByID(id int32) (product.Product, error) {
 	var p product.Product
 
-	query := "SELECT id, label, type, url, weight, createdAt, updatedAt FROM product WHERE id=$1;"
+	query := "SELECT id, label, type, url, weight, createdAt, updatedAt " +
+		"FROM product WHERE id=$1;"
 	row := s.db.QueryRow(
 		query,
 		id,
@@ -184,5 +186,53 @@ func (s Storage) AddProductInCart(cp cart.CartProduct) (cart.CartProduct, error)
 		Quantity:  cp.Quantity,
 		CreatedAt: cp.CreatedAt,
 		UpdatedAt: cp.UpdatedAt,
+	}, nil
+}
+
+func (s Storage) GetOrderByID(id int64) ([]product.Product, error) {
+	var o order.Order
+
+	query := "SELECT cart_id, createdAT, updatedAT " +
+		"FROM customer_order WHERE id = $1;"
+	row := s.db.QueryRow(
+		query,
+		id,
+	)
+	err := row.Scan(&o.CartID, &o.CreatedAt, &o.UpdatedAt)
+	if err != nil {
+		log.Printf("error retrieving the order: %d, %s", id, err.Error())
+		return []product.Product{}, err
+	}
+
+	products, err := s.GetCartByID(o.CartID)
+	if err != nil {
+		log.Printf("error retrieving products for order: %d, %s", id, err.Error())
+		return []product.Product{}, err
+	}
+
+	return products, nil
+}
+
+func (s Storage) InsertOrder(o order.Order) (order.Order, error) {
+	now := time.Now()
+	query := "INSERT INTO customer_order (cart_id, createdAt, updatedAt) " +
+		"VALUES ($1, $2, $3) RETURNING id;"
+
+	lastInsertId := 0
+	err := s.db.QueryRow(
+		query,
+		o.CartID, now, now,
+	).Scan(&lastInsertId)
+
+	if err != nil {
+		log.Print(err.Error())
+		return order.Order{}, errors.New("failed to insert into database")
+	}
+
+	return order.Order{
+		ID:        int64(lastInsertId),
+		CartID:    o.CartID,
+		CreatedAt: o.CreatedAt,
+		UpdatedAt: o.UpdatedAt,
 	}, nil
 }

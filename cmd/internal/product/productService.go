@@ -32,7 +32,7 @@ func (s Service) GetProductByID(ctx context.Context, id int32) (Product, error) 
 	return p, nil
 }
 
-// InsertProduct inserts a new rocket into the DB.
+// InsertProduct inserts a new order into the DB.
 func (s Service) InsertProduct(ctx context.Context, p Product) (Product, error) {
 	p, err := s.Storage.InsertProduct(p)
 	if err != nil {
