@@ -35,7 +35,7 @@ func main() {
 }
 
 func manageDependencies() error {
-	storageProvider, err := db.New()
+	storageProvider, err := db.New(nil)
 	if err != nil {
 		return err
 	}

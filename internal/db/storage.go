@@ -18,7 +18,13 @@ type Storage struct {
 }
 
 // New - return a new store or error
-func New() (Storage, error) {
+func New(db *sqlx.DB) (Storage, error) {
+	if db != nil {
+		return Storage{
+			db: db,
+		}, nil
+	}
+
 	dbUsername := os.Getenv("DB_USERNAME")
 	dbPassword := os.Getenv("DB_PASSWORD")
 	dbHost := os.Getenv("DB_HOST")
